@@ -52,7 +52,12 @@ class EmployeePayrollData {
     }
 
     set startDate(startDate) {
-        this._startDate = startDate;
+        let future = new Date();
+        future.setDate(future.getDate() + 30);
+        if (startDate < new Date() || startDate < future)
+            this._startDate = startDate;
+        else
+            throw "Start Date is Correct";
     }
 
     get notes() {
@@ -82,5 +87,36 @@ function save() {
         }
     }
 
+    let genderList = document.querySelectorAll('input[name="gender"]');
+    let employeeGender;
+    for (let gender of genderList) {
+        if (gender.checked) {
+            employeeGender = gender.value;
+            break;
+        }
+    }
 
+    let departmentList = document.querySelectorAll('.checkbox:checked');
+    let employeeDepartment = new Array();
+    for (let department of departmentList) {
+        if (department.checked) {
+            employeeDepartment.push(department.value);
+        }
+    }
+
+    let employeeSalary = document.querySelector('#salary').value;
+
+    let day = document.querySelector('#day').value;
+    let month = document.querySelector('#month').value;
+    let year = document.querySelector('#year').value;
+    let employeeStartDate = new Date(year, month, day);
+
+    let employeeNotes = document.querySelector('#notes').value;
+
+    try {
+        let employeePayrollData = new EmployeePayrollData(employeeName, employeeProfileImage, employeeGender, employeeDepartment, employeeSalary, employeeStartDate, employeeNotes);
+        console.log(employeePayrollData.toString());
+    } catch (e) {
+        console.error(e);
+    }
 }
