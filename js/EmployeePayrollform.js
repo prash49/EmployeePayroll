@@ -61,3 +61,27 @@ function checkStartDate(startDate) {
     }
 
 }
+
+function save(event) {
+    alert("save")
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    try {
+        let employeePayrollDate = createEmployeePayroll();
+    } catch (e) {
+        return;
+    }
+
+}
+
+function createEmployeePayroll() {
+    let employeePayrollData = new EmployeePayrollData();
+    try {
+        employeePayrollData.name = document.querySelector('#name').value;
+    } catch (e) {
+        let textError = document.querySelector('.text-error');
+        textError.textContent = e;
+    }
+}
