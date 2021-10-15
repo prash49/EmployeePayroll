@@ -29,6 +29,7 @@
             <div class="row-content">
                 <label for="name" class="label text">Name</label>
                 <input type="text" name="name" id="name" class="input" placeholder="Your Name ..." required>
+                <error-output class="text-error"></error-output>
             </div>
 
             <div class="row-content">
@@ -139,13 +140,16 @@
                         <option value="Dec">December</option>
                     </select>
                     <select id="year" name="Year">
-                        <option value="2020">2021</option>
+                        <option value="2022">2022</option>
+                        <option value="2021">2021</option>
                         <option value="2020">2020</option>
                         <option value="2019">2019</option>
                         <option value="2018">2018</option>
                         <option value="2017">2017</option>
                         <option value="2016">2016</option>
                     </select>
+                    <error-output class="dates-error" for="error"></error-output>
+
                 </div>
             </div>
 

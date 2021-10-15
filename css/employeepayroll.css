@@ -170,6 +170,12 @@
             margin-right: 10px;
         }
         
+        error-output {
+            font-size: 15px;
+            font-style: italic;
+            color: rgb(231, 66, 66);
+        }
+        
         @media only screen and (max-width:600px) {
             .form {
                 margin-top: 10px;
