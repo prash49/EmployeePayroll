@@ -38,7 +38,7 @@ function validateDate() {
 }
 
 function checkDate() {
-    let dateError = document.querySelector('.dates-error');
+    let dateError = document.querySelector('.date-error');
     let date = day.value + " " + month.value + " " + year.value;
     try {
         checkStartDate(new Date(Date.parse(date)));
@@ -63,8 +63,6 @@ function checkStartDate(startDate) {
 }
 
 function save(event) {
-    alert("save")
-
     event.preventDefault();
     event.stopPropagation();
 
@@ -79,9 +77,46 @@ function save(event) {
 function createEmployeePayroll() {
     let employeePayrollData = new EmployeePayrollData();
     try {
-        employeePayrollData.name = document.querySelector('#name').value;
+        employeePayrollData.name = getInputValueByID('#name');
     } catch (e) {
-        let textError = document.querySelector('.text-error');
-        textError.textContent = e;
+        setTextValue('.text-error', e);
     }
+    try {
+        let date = getInputValueByID('#day') + " " + getInputValueByID('#month') + " " + getInputValueByID('#year')
+        employeePayrollData.startDate = new Date(Date.parse(date));
+    } catch (e) {
+        setTextValue('.date-error', e);
+    }
+
+    employeePayrollData.profilePic = getSelectedValues('[name=profile').pop();
+    employeePayrollData.gender = getSelectedValues('[name=gender').pop();
+    employeePayrollData.department = getSelectedValues('[name=department');
+    employeePayrollData.salary = getSelectedValues('#salary');
+    employeePayrollData.profilePic = getSelectedValues('#notes');
+    alert(employeePayrollData.toString());
+    return employeePayrollData;
+
+}
+
+function getInputValueByID(id) {
+    let value = document.querySelector(id).value;
+    return value;
+}
+
+function setTextValue(value) {
+    let textError = document.querySelector(className);
+    textError.textContent = value;
+}
+
+function getSelectedValues(propertyValue) {
+    let allItems = document.querySelector(propertyValue);
+    let setItems = [];
+    allItems.forEach(item => {
+        if (item.checked) {
+            setItems.push(item.value);
+        }
+    });
+    return setItems;
+
+
 }
