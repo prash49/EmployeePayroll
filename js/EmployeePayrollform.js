@@ -131,3 +131,29 @@ function createAndUpdateStorage(employeePayrollData) {
     localStorage.setItem("EmployeePayrollListList", JSON.stringify(employeePayrollList));
 
 }
+
+function resetButton() {
+    setValue('#name', '');
+    setValue('#salary', 400000);
+    setValue('#notes', '');
+    setValue('#day', '');
+    setValue('#month', '');
+    setValue('#year', '');
+    setTextValue('.salary-output', 400000);
+    setTextValue('.text-error', '');
+    setTextValue('.date-error', '');
+    unsetSelectedValues('[name=profile]');
+
+}
+
+function setValue(id, value) {
+    let element = document.querySelector(id);
+    element.value = value;
+}
+
+function unsetSelectedValues(propertyValue) {
+    let allItems = document.querySelectorAll(propertyValue);
+    allItems.forEach(item => {
+        item.selected = false;
+    });
+}
