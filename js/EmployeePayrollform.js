@@ -19,7 +19,7 @@ function validateName() {
     let name = document.querySelector('#name');
     let textError = document.querySelector('.text-error');
     name.addEventListener('input', function() {
-        let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$');
+        let nameRegex = RegExp('^[A-Z]{1}[a-z A-Z\\s]{2,}$');
         if (nameRegex.test(name.value)) {
             textError.textContent = "";
         } else {
@@ -67,7 +67,9 @@ function save(event) {
     event.stopPropagation();
 
     try {
-        let employeePayrollDate = createEmployeePayroll();
+        let employeePayrollData = createEmployeePayroll();
+        createAndUpdateStorage(employeePayrollData);
+        alert("Data Stored With name" + employeePayrollData.name);
     } catch (e) {
         return;
     }
@@ -78,6 +80,11 @@ function createEmployeePayroll() {
     let employeePayrollData = new EmployeePayrollData();
     try {
         employeePayrollData.name = getInputValueByID('#name');
+        employeePayrollData.salary = getInputValueByID('#salary');
+        employeePayrollData.notes = getInputValueByID('#notes');
+        employeePayrollData.profilePic = getSelectedValues('[name=profile]').pop();
+        employeePayrollData.gender = getSelectedValues('[name=gender]').pop();
+        employeePayrollData.department = getSelectedValues('[name=department]');
     } catch (e) {
         setTextValue('.text-error', e);
     }
@@ -88,14 +95,9 @@ function createEmployeePayroll() {
         setTextValue('.date-error', e);
     }
 
-    employeePayrollData.profilePic = getSelectedValues('[name=profile').pop();
-    employeePayrollData.gender = getSelectedValues('[name=gender').pop();
-    employeePayrollData.department = getSelectedValues('[name=department');
-    employeePayrollData.salary = getSelectedValues('#salary');
-    employeePayrollData.profilePic = getSelectedValues('#notes');
+
     alert(employeePayrollData.toString());
     return employeePayrollData;
-
 }
 
 function getInputValueByID(id) {
@@ -103,13 +105,13 @@ function getInputValueByID(id) {
     return value;
 }
 
-function setTextValue(value) {
+function setTextValue(className, value) {
     let textError = document.querySelector(className);
     textError.textContent = value;
 }
 
 function getSelectedValues(propertyValue) {
-    let allItems = document.querySelector(propertyValue);
+    let allItems = document.querySelectorAll(propertyValue);
     let setItems = [];
     allItems.forEach(item => {
         if (item.checked) {
@@ -117,6 +119,15 @@ function getSelectedValues(propertyValue) {
         }
     });
     return setItems;
+}
 
+function createAndUpdateStorage(employeePayrollData) {
+    let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
+    if (employeePayrollList == undefined) {
+        employeePayrollList = [employeePayrollData];
+    } else {
+        employeePayrollList.push(employeePayrollData);
+    }
+    localStorage.setItem("EmployeePayrollListList", JSON.stringify(employeePayrollList));
 
 }
