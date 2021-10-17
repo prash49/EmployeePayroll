@@ -128,14 +128,8 @@ th {
     padding: 5px 8px;
 }
 
-.tr {
-    background: #1b2630 0% 0% no-repeat padding-box;
-}
-
-.th {
-    background-color: #1b2630;
-    background: #1b2630 0% 0% no-repeat padding-box;
-    border-radius: 3px 3px 0px 0px;
+th {
+    background: #042849 0% 0% no-repeat padding-box;
     text-align: left;
     font: normal normal medium 18px/24px Roboto;
     letter-spacing: 0px;
