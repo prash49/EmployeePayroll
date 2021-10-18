@@ -23,7 +23,7 @@ function validateName() {
         if (nameRegex.test(name.value)) {
             textError.textContent = "";
         } else {
-            textError.textContent = "Name is Incorrect"
+            textError.textContent = "Name is Incorrect";
         }
     });
 }
@@ -70,6 +70,7 @@ function save(event) {
         let employeePayrollData = createEmployeePayroll();
         createAndUpdateStorage(employeePayrollData);
         alert("Data Stored With name" + employeePayrollData.name);
+        window.location.replace("../pages/EmployeePayrollHomePage.html")
     } catch (e) {
         return;
     }
@@ -123,12 +124,12 @@ function getSelectedValues(propertyValue) {
 
 function createAndUpdateStorage(employeePayrollData) {
     let employeePayrollList = JSON.parse(localStorage.getItem("EmployeePayrollList"));
-    if (employeePayrollList == undefined) {
-        employeePayrollList = [employeePayrollData];
-    } else {
+    if (employeePayrollList != undefined) {
         employeePayrollList.push(employeePayrollData);
+    } else {
+        employeePayrollList = [employeePayrollData];
     }
-    localStorage.setItem("EmployeePayrollListList", JSON.stringify(employeePayrollList));
+    localStorage.setItem("EmployeePayrollList", JSON.stringify(employeePayrollList));
 
 }
 
