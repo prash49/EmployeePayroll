@@ -127,7 +127,6 @@ function createEmployeePayroll() {
     }
 
 
-    alert(employeePayrollData.toString());
     return employeePayrollData;
 }
 
